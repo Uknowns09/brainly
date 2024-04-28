@@ -24,9 +24,11 @@ app.get('/brainly', async (req, res) => {
     let randomIndex = Math.floor(Math.random() * results.length);
     let randomAnswer = results[randomIndex].answers[0].content;
     
-    const formattedAnswer = randomAnswer.replace(/<(?:.|\n)*?>/gm, ''); // Remove HTML tags
+    const formattedResult = [{
+      answer: randomAnswer.replace(/<(?:.|\n)*?>/gm, '') // Remove HTML tags
+    }];
 
-    res.json({ answer: formattedAnswer });
+    res.json(formattedResult);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while processing your request' });
