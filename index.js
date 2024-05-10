@@ -3,8 +3,7 @@ const { Brainly } = require("brainly-scraper-v2");
 const app = express();
 const port = 3000;
 
-Brainly.initialize();
-const brain = new Brainly("ph");
+const brainly = new Brainly("ph");
 
 app.get('/brainly', async (req, res) => {
   try {
@@ -15,7 +14,7 @@ app.get('/brainly', async (req, res) => {
       return res.status(400).json({ error: 'Query parameter "q" is required' });
     }
 
-    let results = await brain.searchWithMT(query, countryCode);
+    let results = await brainly.searchWithMT(query, countryCode);
 
     if (results.length === 0) {
       return res.status(404).json({ message: 'No answer found. Please try another query.' });
